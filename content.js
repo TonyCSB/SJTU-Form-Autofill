@@ -1,8 +1,12 @@
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
-    autofill();
+    switch (msg.text) {
+        case "loadExit":
+            exit_autofill();
+            break;
+    }
 });
 
-function autofill() {
+function exit_autofill() {
     // 手机号 Mobile
     let mobile = "13817576706";
 

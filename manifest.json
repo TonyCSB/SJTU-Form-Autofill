@@ -9,22 +9,17 @@
         "persistent": false
     },
     "permissions": [
-        "cookies", 
         "tabs", 
-        "http://*/", 
-        "https://*/", 
-        "<all_urls>",
-        "clipboardWrite",
-        "clipboardRead",
-        "notifications",
-        "declarativeContent",
-        "activeTab"
+        "storage",
+        "declarativeContent"
     ],
     "content_scripts": [
         {
-            "matches": ["<all_urls>"],
+            "matches": ["https://form.sjtu.edu.cn/*"],
             "js": ["content.js"]
         }
     ],
-    "browser_action": {}
+    "page_action": {
+        "default_popup": "popup.html"
+    }
 }
