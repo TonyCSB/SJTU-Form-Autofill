@@ -120,7 +120,7 @@ function exit_save() {
         reEnter = true;
         reEnterFrom = document.querySelector("input[name='fieldComeTime']").value;
         reEnterTo = document.querySelector("input[name='fieldBackTime']").value;
-    } else if (document.querySelector("#fieldThatDay-1").checked) {
+    } else if (document.querySelector("#fieldThatDay-0").checked) {
         reEnter = false;
         reEnterFrom = null;
         reEnterTo = null;
@@ -399,7 +399,7 @@ function exit_autofill() {
         
         // 是否当天往返 Whether re-enter on the same day
         if (reEnter) {
-            document.querySelector("#fieldThatDay-1").checked = true;
+            document.querySelector("#fieldThatDay-1").click();
             if (reEnterFrom) {
                 document.querySelector("input[name='fieldComeTime']").value = reEnterFrom;
             }
@@ -407,7 +407,7 @@ function exit_autofill() {
                 document.querySelector("input[name='fieldBackTime']").value = reEnterTo;
             }
         } else if (reEnter == false) {
-            document.querySelector("#fieldThatDay-0").checked = true
+            document.querySelector("#fieldThatDay-0").click();
         }
 
 
