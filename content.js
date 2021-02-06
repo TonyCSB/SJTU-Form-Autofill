@@ -2,16 +2,16 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     switch (msg.text) {
         case "saveEntry":
         case "saveExit":
-            save(msg.text);
+            save();
             break;
         case "loadEntry":
         case "loadExit":
-            autofill(msg.text);
+            autofill();
             break;
     }
 });
 
-function save(type) {
+function save() {
     form = {};
     [...document.querySelectorAll("input[type=text]")].map(t => {
         form[t.name] = t.value;
@@ -26,17 +26,15 @@ function save(type) {
         }
         form[s.name] = option;
     });
-    f = type == "saveEntry" ? "entryForm" : "exitForm";
 
     saveForm = {};
-    saveForm[f] = form;
+    saveForm[document.title] = form;
     chrome.storage.sync.set(saveForm, _ => console.log(form));
 }
 
-function autofill(type) {
-    f = type == "loadEntry" ? "entryForm" : "exitForm";
-    chrome.storage.sync.get(f, result => {
-        let form = result[f];
+function autofill() {
+    chrome.storage.sync.get(document.title, result => {
+        let form = result[document.title];
         console.log(form);
         [...document.querySelectorAll("input[type=text]")].map(t => {
             if (t.name == "fieldComeDate") {
@@ -72,4 +70,43 @@ function autofill(type) {
             c.click();
         }
     });
+}
+
+window.addEventListener("load", function(){
+    const regex = /https?:\/\/form.sjtu.edu.cn\/infoplus\/form\/\d+\/render/g;
+    if (regex.test(document.URL)) {
+        generateIcon("fas fa-file-export", "保存模板", "saveTemplateIcon");
+        generateIcon("fas fa-file-import", "载入模板", "autofillIcon");
+        document.getElementById("saveTemplateIcon").addEventListener("click", save);
+        document.getElementById("autofillIcon").addEventListener("click", autofill);
+    }
+});
+
+function generateIcon(icon, helpText, id) {
+    // li
+    li = document.createElement("li");
+    li.classList = "tool_button";
+
+    // a
+    link = document.createElement("a");
+    link.classList = "tool_button";
+    link.id = id;
+    link.href = "#";
+
+    // i
+    i = document.createElement("i");
+    i.classList = icon;
+    i.setAttribute("style", "font-family:'Font Awesome 5 Free' !important");
+
+    // span
+    span = document.createElement("span");
+    span.classList = "toolbar_button_tip round-corner z-depth-1";
+    span.innerText = helpText;
+
+    // append together
+    link.appendChild(i);
+    link.appendChild(span);
+    li.appendChild(link);
+
+    document.getElementById("form_command_bar").appendChild(li);
 }

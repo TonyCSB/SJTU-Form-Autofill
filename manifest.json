@@ -1,6 +1,6 @@
 {
     "name": "SJTU Entry Exit Application Autofill",
-    "version": "2.0",
+    "version": "2.1",
     "description": "Autofill the Entry & Exit Application",
     "manifest_version": 2,
     "author": "Tony Chen",
@@ -16,10 +16,19 @@
     "content_scripts": [
         {
             "matches": ["https://form.sjtu.edu.cn/*"],
-            "js": ["content.js"]
+            "js": ["content.js"],
+            "css": [
+                "css/fontawesome.min.css",
+                "css/regular.min.css"
+            ]
         }
     ],
     "page_action": {
         "default_popup": "popup.html"
-    }
+    },
+    "web_accessible_resources": [
+       "css/fontawesome.min.css",
+       "css/regular.min.css",
+       "webfonts/*"
+    ]
 }
