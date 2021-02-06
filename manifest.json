@@ -1,6 +1,6 @@
 {
     "name": "SJTU Form Autofill",
-    "version": "2.1",
+    "version": "2.2",
     "description": "Autofill forms on SJTU website",
     "manifest_version": 2,
     "author": "Tony Chen",
