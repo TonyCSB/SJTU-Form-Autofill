@@ -1,7 +1,7 @@
 {
-    "name": "SJTU Entry Exit Application Autofill",
+    "name": "SJTU Form Autofill",
     "version": "2.1",
-    "description": "Autofill the Entry & Exit Application",
+    "description": "Autofill forms on SJTU website",
     "manifest_version": 2,
     "author": "Tony Chen",
     "background": {
