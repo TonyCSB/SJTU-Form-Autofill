@@ -75,8 +75,8 @@ function autofill() {
 window.addEventListener("load", function(){
     const regex = /https?:\/\/form.sjtu.edu.cn\/infoplus\/form\/\d+\/render/g;
     if (regex.test(document.URL)) {
-        generateIcon("fas fa-file-export", "保存模板", "saveTemplateIcon");
-        generateIcon("fas fa-file-import", "载入模板", "autofillIcon");
+        generateIcon("fas fa-file-export", "载入模板", "autofillIcon");
+        generateIcon("fas fa-file-import", "保存模板", "saveTemplateIcon");
         document.getElementById("saveTemplateIcon").addEventListener("click", save);
         document.getElementById("autofillIcon").addEventListener("click", autofill);
     }
